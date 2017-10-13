@@ -1,10 +1,12 @@
 import webpack from 'webpack';
 import path from 'path';
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 export default {
   entry: [
     'webpack-hot-middleware/client',
-    './src/main',
+    '../src/main',
   ],
   output: {
     path: path.join(__dirname, 'public'),
@@ -12,17 +14,47 @@ export default {
     publicPath: '/assets/',
   },
   module: {
-    loaders: [{
-      tests: /\.js?$/,
-      loaders: ['babel-loader'],
-      include: path.join(__dirname, 'src'),
-    }],
+    loaders: [
+      {
+        test: /\.js?$/,
+        loader: 'babel-loader',
+        include: path.join(__dirname, 'src'),
+      },
+      {
+        rules: [
+          {
+            test: /\.css$/,
+            use: ExtractTextPlugin.extract({
+              fallback: 'style-loader',
+              use: 'css-loader',
+            }),
+          },
+        ],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 40000 },
+          },
+          'image-webpack-loader',
+        ],
+      },
+    ],
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('styles.css'),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Popper: ['popper.js', 'default'],
+    }),
   ],
   resolve: {
-    extensions: ['js', '.css'],
+    extensions: ['js', '.css', 'jpeg', 'png', 'gif', 'svg'],
   },
 };
