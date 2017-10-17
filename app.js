@@ -7,6 +7,7 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 import webpack from 'webpack';
 import config from './webpack.config';
@@ -35,6 +36,7 @@ app.set('view engine', 'hbs');
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, '../public', 'images/favicon.ico')));
 app.use(logger('dev'));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
