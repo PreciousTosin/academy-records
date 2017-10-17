@@ -1,8 +1,19 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: beige;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: beige;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
 }
+
+/* wrapper container */
+#wrapper {
+    padding-top: 2rem;
+}
+
+/* table list section */
+#studentTable {
+    padding-top: 2rem;
+}
+
