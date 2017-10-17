@@ -25,6 +25,21 @@ const reFormat = (data) => {
   return finalData.data;
 };
 
+const renderTable = () => {
+  $('#my-table').DataTable({
+    columnDefs: [
+      {
+        visible: false,
+        targets: [0, 4],
+      },
+    ],
+    ajax: {
+      url: '/students',
+      dataSrc: d => reFormat(d),
+    },
+  });
+};
+
 /*
 const fetchStudents = () => {
   $.ajax({
@@ -38,12 +53,6 @@ const fetchStudents = () => {
 */
 
 $(document).ready(() => {
-  // fetchStudents();
-  $('#my-table').DataTable({
-    ajax: {
-      url: '/students',
-      dataSrc: d => reFormat(d),
-    },
-  });
+  renderTable();
 });
 
