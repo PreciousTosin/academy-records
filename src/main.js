@@ -35,7 +35,15 @@ const reFormat = (data) => {
 const renderTable = () => {
   studentTable = $('#my-table').DataTable({
     lengthChange: false,
-    buttons: ['copy', 'excel', 'pdf', 'colvis'],
+    buttons: [
+      {
+        extend: 'copy',
+        text: 'Copy to clipboard',
+      },
+      'excel',
+      'pdf',
+      'colvis',
+    ],
     columnDefs: [
       {
         visible: false,
