@@ -9,6 +9,8 @@ require('datatables.net-buttons-bs4');
 // require('datatables.net-fixedheader-bs4')();
 require('datatables.net-responsive-bs4');
 
+let studentTable = '';
+
 const reFormat = (data) => {
   const finalData = {};
   const largerArr = [];
@@ -26,7 +28,7 @@ const reFormat = (data) => {
 };
 
 const renderTable = () => {
-  $('#my-table').DataTable({
+  studentTable = $('#my-table').DataTable({
     columnDefs: [
       {
         visible: false,
@@ -37,6 +39,31 @@ const renderTable = () => {
       url: '/students',
       dataSrc: d => reFormat(d),
     },
+  });
+};
+
+const addDataEvent = () => {
+  $('#student--form').on('submit', (event) => {
+    event.preventDefault();
+    const successAlert = $('#success--alert');
+    const failAlert = $('#fail--alert');
+    const formData = {
+      name: $('input[name=name]').val(),
+      age: $('input[name=age]').val(),
+      course: $('input[name=course]').val(),
+    };
+    $.ajax({
+      url: '/students',
+      type: 'POST',
+      data: formData,
+    }).done((data) => {
+      $(successAlert).addClass('show');
+      studentTable.ajax.reload(null, false);
+      console.log(data);
+    }).fail((err) => {
+      $(failAlert).addClass('show');
+      console.log(err);
+    });
   });
 };
 
@@ -53,6 +80,7 @@ const fetchStudents = () => {
 */
 
 $(document).ready(() => {
+  addDataEvent();
   renderTable();
 });
 
