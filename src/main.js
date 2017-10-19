@@ -4,10 +4,15 @@ import '../public/stylesheets/style.css';
 
 const $ = require('jquery');
 
+/* eslint import/no-extraneous-dependencies: 'off' */
 require('datatables.net-bs4');
 require('datatables.net-buttons-bs4');
-// require('datatables.net-fixedheader-bs4')();
+// require('datatables.net-fixedheader-bs4');
 require('datatables.net-responsive-bs4');
+require('datatables.net-buttons/js/buttons.colVis.js');
+require('datatables.net-buttons/js/buttons.flash.js');
+require('datatables.net-buttons/js/buttons.html5.js');
+require('datatables.net-buttons/js/buttons.print.js');
 
 let studentTable = '';
 
@@ -29,6 +34,8 @@ const reFormat = (data) => {
 
 const renderTable = () => {
   studentTable = $('#my-table').DataTable({
+    lengthChange: false,
+    buttons: ['copy', 'excel', 'pdf', 'colvis'],
     columnDefs: [
       {
         visible: false,
@@ -38,6 +45,10 @@ const renderTable = () => {
     ajax: {
       url: '/students',
       dataSrc: d => reFormat(d),
+    },
+    initComplete: () => {
+      studentTable.buttons().container()
+        .appendTo($('.col-md-6:eq(0)', studentTable.table().container()));
     },
   });
 };
