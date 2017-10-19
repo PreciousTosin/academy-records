@@ -30,7 +30,7 @@
     <div id="wrapper" class="container-fluid">
       <h1 class="text-center">WELCOME TO NORMAN</h1>
 
-      <section id="studentTable" class="card">
+      <section id="table--container" class="card">
 
         <table id="my-table" class="display table table-striped table-hover"  cellspacing="0" width="100%">
           <thead>
@@ -54,6 +54,42 @@
         </table>
 
       </section>
+
+      <section id="form--container">
+
+        <div id="success--alert" class="alert alert-success alert-dismissible fade" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          Student record added successfully.
+        </div>
+
+        <div id="fail--alert" class="alert alert-danger alert-dismissible fade" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>An error</strong> has occured. Check your data.
+        </div>
+
+        <form id="student--form" enctype="application/x-www-form-urlencoded" action="/students" method="POST">
+          <div class="form-group">
+            <label for="fullName">Name</label>
+            <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="name">
+          </div>
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="text" class="form-control" id="age" placeholder="Age" name="age">
+          </div>
+          <div class="form-group">
+            <label for="course">Course</label>
+            <input type="text" class="form-control" id="course" placeholder="Course" name="course">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+      </section>
+
     </div>
   </body>
 </html>
