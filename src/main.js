@@ -1,5 +1,6 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'datatables.net-select-bs4/css/select.bootstrap4.min.css';
 import '../public/stylesheets/style.css';
 
 const $ = require('jquery');
@@ -13,6 +14,7 @@ require('datatables.net-buttons/js/buttons.colVis.js');
 require('datatables.net-buttons/js/buttons.flash.js');
 require('datatables.net-buttons/js/buttons.html5.js');
 require('datatables.net-buttons/js/buttons.print.js');
+require('datatables.net-select');
 
 let studentTable = '';
 
@@ -34,7 +36,19 @@ const reFormat = (data) => {
 
 const renderTable = () => {
   studentTable = $('#my-table').DataTable({
+    columns: [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+    ],
     lengthChange: false,
+    select: {
+      style: 'single',
+    },
     buttons: [
       {
         extend: 'copy',
@@ -48,6 +62,16 @@ const renderTable = () => {
       {
         visible: false,
         targets: [0, 4],
+      },
+      {
+        targets: -1,
+        data: null,
+        defaultContent: '<button class="edit--btn btn btn-secondary">Delete!</button>',
+      },
+      {
+        targets: -2,
+        data: null,
+        defaultContent: '<button class="delete-btn btn btn-secondary">Edit!</button>',
       },
     ],
     ajax: {
