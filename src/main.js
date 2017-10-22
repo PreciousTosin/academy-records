@@ -42,8 +42,18 @@ const renderTable = () => {
       null,
       null,
       null,
-      null,
-      null,
+      {
+        className: 'edit--btn',
+        orderable: false,
+        data: null,
+      },
+      {
+        className: 'delete--btn',
+        orderable: false,
+        data: null,
+        /* sortable: false,
+        render: o => '<button class="edit--btn btn btn-secondary">Delete!</button>', */
+      },
     ],
     lengthChange: false,
     select: {
@@ -54,9 +64,13 @@ const renderTable = () => {
         extend: 'copy',
         text: 'Copy to clipboard',
       },
-      'excel',
       'pdf',
-      'colvis',
+      {
+        text: 'View Record',
+        action: () => {
+          console.log('VIEW BUTTON CLICKED');
+        },
+      },
     ],
     columnDefs: [
       {
@@ -71,7 +85,7 @@ const renderTable = () => {
       {
         targets: -2,
         data: null,
-        defaultContent: '<button class="delete-btn btn btn-secondary">Edit!</button>',
+        defaultContent: '<button class="delete--btn btn btn-secondary">Edit!</button>',
       },
     ],
     ajax: {
@@ -110,6 +124,17 @@ const addDataEvent = () => {
   });
 };
 
+const changeRowSelected = () => {
+  $('#example tbody').on('click', 'tr', () => {
+    if ($(this).hasClass('selected')) {
+      $(this).removeClass('selected');
+    } else {
+      studentTable.$('tr.selected').removeClass('selected');
+      $(this).addClass('selected');
+    }
+  });
+};
+
 /*
 const fetchStudents = () => {
   $.ajax({
@@ -125,5 +150,25 @@ const fetchStudents = () => {
 $(document).ready(() => {
   addDataEvent();
   renderTable();
+  changeRowSelected();
+  $('#my-table tbody').on('click', 'td.delete--btn', function () {
+    console.log('DELETE BUTTON CLICKED');
+    const rowData = studentTable.row($(this).parents('tr')).data();
+    const route = `/students/${rowData[0]}`;
+    // const test = $(this).parent('tr');
+    // const test = studentTable.row($(this).parents('tr')).data();
+    studentTable.row($(this).parents('tr')).remove().draw(false);
+    $.ajax({
+      url: route,
+      type: 'DELETE',
+    }).done((data) => {
+      console.log(`DELETE SUCCESSFUL ${data}`);
+    }).fail((err) => {
+      console.log(err);
+    });
+  });
+  $('#my-table tbody').on('click', 'td.edit--btn', () => {
+    console.log('EDIT BUTTON CLICKED');
+  });
 });
 
