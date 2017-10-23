@@ -1,19 +1,20 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'alertifyjs/build/css/alertify.min.css';
 import 'datatables.net-select-bs4/css/select.bootstrap4.min.css';
 import '../public/stylesheets/style.css';
 
 const $ = require('jquery');
-
+const alertify = require('alertifyjs');
 /* eslint import/no-extraneous-dependencies: 'off' */
 require('datatables.net-bs4');
 require('datatables.net-buttons-bs4');
 // require('datatables.net-fixedheader-bs4');
 require('datatables.net-responsive-bs4');
-require('datatables.net-buttons/js/buttons.colVis.js');
-require('datatables.net-buttons/js/buttons.flash.js');
-require('datatables.net-buttons/js/buttons.html5.js');
-require('datatables.net-buttons/js/buttons.print.js');
+// require('datatables.net-buttons/js/buttons.colVis.js');
+// require('datatables.net-buttons/js/buttons.flash.js');
+// require('datatables.net-buttons/js/buttons.html5.js');
+// require('datatables.net-buttons/js/buttons.print.js');
 require('datatables.net-select');
 
 let studentTable = '';
@@ -33,6 +34,14 @@ const reFormat = (data) => {
   // return JSON.stringify(finalData);
   return finalData.data;
 };
+
+const displayData = data => (
+  `<div class="card" style="width: 20rem;">
+    <div class="card-body">
+      <h4 class="card-title">FULL DETAILS</h4>
+      <p class="card-text">${data[1]}</p>
+    </div>
+   </div>`);
 
 const renderTable = () => {
   studentTable = $('#my-table').DataTable({
@@ -69,6 +78,8 @@ const renderTable = () => {
         text: 'View Record',
         action: () => {
           console.log('VIEW BUTTON CLICKED');
+          const rowData = studentTable.row('.selected').data();
+          alertify.alert(displayData(rowData));
         },
       },
     ],
@@ -125,7 +136,7 @@ const addDataEvent = () => {
 };
 
 const changeRowSelected = () => {
-  $('#example tbody').on('click', 'tr', () => {
+  $('#example').on('click', 'tr', () => {
     if ($(this).hasClass('selected')) {
       $(this).removeClass('selected');
     } else {
@@ -135,6 +146,25 @@ const changeRowSelected = () => {
   });
 };
 
+const createDialog = () => {
+  if (!alertify.myAlert) {
+    // define a new dialog
+    alertify.dialog('myAlert', () => ({
+      main(message) {
+        this.message = message;
+      },
+      setup() {
+        return {
+          buttons: [{ text: 'cool!', key: 27/* Esc */ }],
+          focus: { element: 0 },
+        };
+      },
+      prepare() {
+        this.setContent(this.message);
+      },
+    }));
+  }
+};
 /*
 const fetchStudents = () => {
   $.ajax({
@@ -151,7 +181,8 @@ $(document).ready(() => {
   addDataEvent();
   renderTable();
   changeRowSelected();
-  $('#my-table tbody').on('click', 'td.delete--btn', function () {
+  createDialog();
+  $('#my-table').on('click', 'td.delete--btn', function () {
     console.log('DELETE BUTTON CLICKED');
     const rowData = studentTable.row($(this).parents('tr')).data();
     const route = `/students/${rowData[0]}`;
@@ -167,8 +198,25 @@ $(document).ready(() => {
       console.log(err);
     });
   });
-  $('#my-table tbody').on('click', 'td.edit--btn', () => {
+  $('#my-table').on('click', 'td.edit--btn', () => {
     console.log('EDIT BUTTON CLICKED');
   });
+
+  const pre = document.createElement('pre');
+  // custom style.
+  pre.style.maxHeight = '400px';
+  pre.style.margin = '0';
+  pre.style.padding = '24px';
+  pre.style.whiteSpace = 'pre-wrap';
+  pre.style.textAlign = 'justify';
+  pre.appendChild(document.createTextNode($('#la').text()));
+  // show as confirm
+  alertify.confirm(pre, () => {
+    alertify.success('Accepted');
+  }, () => {
+    alertify.error('Declined');
+  }).set({ labels: { ok: 'Accept', cancel: 'Decline' }, padding: false });
+  // call custom dialog
+  alertify.myAlert('DISPLAY THIS');
 });
 
