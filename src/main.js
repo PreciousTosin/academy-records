@@ -82,7 +82,7 @@ const renderTable = () => {
           if (rowData === undefined) {
             alertify.error('Select a row to view record');
           } else {
-            alertify.alert(displayData(rowData));
+            alertify.myAlert(displayData(rowData));
           }
         },
       },
@@ -159,12 +159,26 @@ const createDialog = () => {
       },
       setup() {
         return {
-          buttons: [{ text: 'cool!', key: 27/* Esc */ }],
+          buttons: [{ text: 'Exit!', key: 27/* Esc */ }],
           focus: { element: 0 },
+          options: {
+            maximizable: true,
+            closableByDimmer: false,
+            resizable: false,
+            transition: 'fade',
+          },
         };
       },
       prepare() {
         this.setContent(this.message);
+        this.setHeader('Record Details');
+      },
+      hooks: {
+        onshow() {
+          this.elements.dialog.style.maxWidth = 'none';
+          this.elements.dialog.style.width = '80%';
+          this.elements.dialog.style.height = '30%';
+        },
       },
     }));
   }
