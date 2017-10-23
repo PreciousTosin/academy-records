@@ -79,7 +79,11 @@ const renderTable = () => {
         action: () => {
           console.log('VIEW BUTTON CLICKED');
           const rowData = studentTable.row('.selected').data();
-          alertify.alert(displayData(rowData));
+          if (rowData === undefined) {
+            alertify.error('Select a row to view record');
+          } else {
+            alertify.alert(displayData(rowData));
+          }
         },
       },
     ],
