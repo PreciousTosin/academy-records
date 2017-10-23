@@ -9,6 +9,7 @@
     "build": "npm run removebuild && npm run transpile"
   },
   "dependencies": {
+    "alertifyjs": "^1.11.0",
     "body-parser": "~1.17.1",
     "bootstrap": "^4.0.0-beta",
     "cookie-parser": "~1.4.3",
