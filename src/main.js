@@ -188,34 +188,24 @@ $(document).ready(() => {
     const route = `/students/${rowData[0]}`;
     // const test = $(this).parent('tr');
     // const test = studentTable.row($(this).parents('tr')).data();
-    studentTable.row($(this).parents('tr')).remove().draw(false);
-    $.ajax({
-      url: route,
-      type: 'DELETE',
-    }).done((data) => {
-      console.log(`DELETE SUCCESSFUL ${data}`);
-    }).fail((err) => {
-      console.log(err);
-    });
+    alertify.confirm('Delete Student Record', 'Are you sure you want to delete', () => {
+      studentTable.row($(this).parents('tr')).remove().draw(false);
+      $.ajax({
+        url: route,
+        type: 'DELETE',
+      }).done((data) => {
+        console.log(`DELETE SUCCESSFUL ${data}`);
+      }).fail((err) => {
+        console.log(err);
+      });
+      alertify.success('DELETE SUCCESSFUL');
+    }, () => {
+      alertify.error('Declined');
+    }).set({ labels: { ok: 'Okay', cancel: 'Cancel' }, padding: false });
   });
   $('#my-table').on('click', 'td.edit--btn', () => {
     console.log('EDIT BUTTON CLICKED');
   });
-
-  const pre = document.createElement('pre');
-  // custom style.
-  pre.style.maxHeight = '400px';
-  pre.style.margin = '0';
-  pre.style.padding = '24px';
-  pre.style.whiteSpace = 'pre-wrap';
-  pre.style.textAlign = 'justify';
-  pre.appendChild(document.createTextNode($('#la').text()));
-  // show as confirm
-  alertify.confirm(pre, () => {
-    alertify.success('Accepted');
-  }, () => {
-    alertify.error('Declined');
-  }).set({ labels: { ok: 'Accept', cancel: 'Decline' }, padding: false });
   // call custom dialog
   alertify.myAlert('DISPLAY THIS');
 });
