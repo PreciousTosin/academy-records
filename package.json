@@ -11,7 +11,7 @@
     "removebuild": "node_modules/.bin/rimraf build",
     "transpile": "babel . -d build --presets latest --ignore node_modules",
     "build": "npm run removebuild && npm run transpile",
-    "postinstall" : "node_modules/.bin/rimraf build && babel . -d build --presets latest --ignore node_modules",
+    "postinstall": "node_modules/.bin/rimraf build && babel . -d build --presets latest --ignore node_modules",
     "heroku-postbuild": "webpack --config ./build/webpack.prod.config.js --progress"
   },
   "dependencies": {
@@ -40,6 +40,7 @@
     "async": "^2.5.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-latest": "^6.24.1",
     "css-loader": "^0.28.7",
     "eslint": "^4.8.0",
