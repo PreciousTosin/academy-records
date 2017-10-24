@@ -66,6 +66,25 @@ const createEditForm = data => (
   </form>`
 );
 
+const createAddForm = () => (
+  `<form id="student--form" action="/students" method="POST">
+    <div class="form-group">
+      <label for="fullName">Name</label>
+      <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="name">
+    </div>
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="text" class="form-control" id="age" placeholder="Age" name="age">
+    </div>
+    <div class="form-group">
+      <label for="course">Course</label>
+      <input type="text" class="form-control" id="course" placeholder="Course" name="course">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>`
+);
+
 const renderTable = () => {
   studentTable = $('#my-table').DataTable({
     columns: [
@@ -98,8 +117,14 @@ const renderTable = () => {
       },
       'pdf',
       {
+        text: 'New Record',
+        action() {
+          alertify.editDialog(createAddForm());
+        },
+      },
+      {
         text: 'View Record',
-        action: () => {
+        action() {
           console.log('VIEW BUTTON CLICKED');
           const rowData = studentTable.row('.selected').data();
           if (rowData === undefined) {
@@ -138,10 +163,8 @@ const renderTable = () => {
 };
 
 const addDataEvent = () => {
-  $('#student--form').on('submit', (event) => {
+  $('body').on('submit', '#student--form', (event) => {
     event.preventDefault();
-    const successAlert = $('#success--alert');
-    const failAlert = $('#fail--alert');
     const formData = {
       name: $('input[name=name]').val(),
       age: $('input[name=age]').val(),
@@ -152,11 +175,12 @@ const addDataEvent = () => {
       type: 'POST',
       data: formData,
     }).done((data) => {
-      $(successAlert).addClass('show');
       studentTable.ajax.reload(null, false);
+      alertify.editDialog().close();
+      alertify.success('NEW RECORD ADDED!');
       console.log(data);
     }).fail((err) => {
-      $(failAlert).addClass('show');
+      alertify.error('OPERATION NOT SUCCESSFUL');
       console.log(err);
     });
   });
