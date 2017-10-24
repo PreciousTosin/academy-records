@@ -7,7 +7,7 @@
     "removebuild": "node_modules/.bin/rimraf build",
     "transpile": "babel . -d build --presets latest --ignore node_modules",
     "build": "npm run removebuild && npm run transpile",
-    "postinstall" : "babel . -d build --presets latest --ignore node_modules",
+    "postinstall" : "node_modules/.bin/rimraf build && babel . -d build --presets latest --ignore node_modules",
     "heroku-postbuild": "webpack --config ./build/webpack.prod.config.js --progress"
   },
   "dependencies": {
