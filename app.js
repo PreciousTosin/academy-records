@@ -8,7 +8,6 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
-
 import webpack from 'webpack';
 import config from './webpack.config';
 
@@ -24,7 +23,6 @@ require('dotenv').config();
 // var users = require('./routes/users');
 
 const app = express();
-const compiler = webpack(config);
 
 mongoose.promise = global.Promise;
 switch (process.env.ENV) {
@@ -47,8 +45,8 @@ switch (process.env.ENV) {
 seedDB();
 
 // view engine setup
-app.set('views', path.join(__dirname, '../views'));
-app.set('view engine', 'hbs');
+// app.set('views', path.join(__dirname, '../views'));
+// app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, '../public', 'images/favicon.ico')));
@@ -57,19 +55,24 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, './public')));
 
-app.use(require('webpack-dev-middleware')(compiler, {
-  quiet: false,
-  noInfo: false,
-  publicPath: config.output.publicPath,
-}));
+/* eslint global-require: 'off' */
+if (process.env.ENV !== 'production') {
+  const compiler = webpack(config);
 
-app.use(require('webpack-hot-middleware')(compiler, {
-  log: console.log,
-  path: '/__webpack_hmr',
-  heartbeat: 10 * 1000,
-}));
+  app.use(require('webpack-dev-middleware')(compiler, {
+    quiet: false,
+    noInfo: false,
+    publicPath: config.output.publicPath,
+  }));
+
+  app.use(require('webpack-hot-middleware')(compiler, {
+    log: console.log,
+    path: '/__webpack_hmr',
+    heartbeat: 10 * 1000,
+  }));
+}
 
 app.use('/', index);
 app.use('/users', users);
