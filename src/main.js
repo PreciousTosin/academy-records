@@ -9,12 +9,7 @@ const alertify = require('alertifyjs');
 /* eslint import/no-extraneous-dependencies: 'off' */
 require('datatables.net-bs4');
 require('datatables.net-buttons-bs4');
-// require('datatables.net-fixedheader-bs4');
 require('datatables.net-responsive-bs4');
-// require('datatables.net-buttons/js/buttons.colVis.js');
-// require('datatables.net-buttons/js/buttons.flash.js');
-// require('datatables.net-buttons/js/buttons.html5.js');
-// require('datatables.net-buttons/js/buttons.print.js');
 require('datatables.net-select');
 
 let studentTable = '';
@@ -102,8 +97,6 @@ const renderTable = () => {
         className: 'delete--btn',
         orderable: false,
         data: null,
-        /* sortable: false,
-        render: o => '<button class="edit--btn btn btn-secondary">Delete!</button>', */
       },
     ],
     lengthChange: false,
@@ -111,11 +104,6 @@ const renderTable = () => {
       style: 'single',
     },
     buttons: [
-      {
-        extend: 'copy',
-        text: 'Copy to clipboard',
-      },
-      'pdf',
       {
         text: 'New Record',
         action() {
