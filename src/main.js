@@ -43,6 +43,29 @@ const displayData = data => (
     </div>
    </div>`);
 
+const createEditForm = data => (
+  `<form id="editForm" action="/students/${data[1]}" method="POST">
+    <div class="form-group" style="visibility: hidden">
+      <label for="id">ID</label>
+      <input type="text" class="form-control" id="id" placeholder="Identification" name="id" value="${data[0]}">
+    </div>
+    <div class="form-group">
+      <label for="fullName">Name</label>
+      <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="editedName" value="Moses">
+    </div>
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="text" class="form-control" id="age" placeholder="Age" name="editedAge" value="35">
+    </div>
+    <div class="form-group">
+      <label for="course">Course</label>
+      <input type="text" class="form-control" id="course" placeholder="Course" name="editedCourse" value="egbe science">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>`
+);
+
 const renderTable = () => {
   studentTable = $('#my-table').DataTable({
     columns: [
@@ -82,7 +105,7 @@ const renderTable = () => {
           if (rowData === undefined) {
             alertify.error('Select a row to view record');
           } else {
-            alertify.myAlert(displayData(rowData));
+            alertify.viewDialog(displayData(rowData));
           }
         },
       },
@@ -139,6 +162,33 @@ const addDataEvent = () => {
   });
 };
 
+const editDataEvent = () => {
+  $('body').on('submit', '#editForm', (event) => {
+    console.log('SUBMIT EDIT FORM');
+    event.preventDefault();
+    const id = $('input[name=id]').val();
+    const route = `/students/${id}`;
+    const formData = {
+      name: $('input[name=editedName]').val(),
+      age: $('input[name=editedAge]').val(),
+      course: $('input[name=editedCourse]').val(),
+    };
+    $.ajax({
+      url: route,
+      type: 'PUT',
+      data: formData,
+    }).done((data) => {
+      studentTable.ajax.reload(null, false);
+      alertify.editDialog().close();
+      alertify.success('UPDATE SUCESSFUL!');
+      console.log(data);
+    }).fail((err) => {
+      alertify.error('UPDATE NOT SUCCESSFUL');
+      console.log(err);
+    });
+  });
+};
+
 const changeRowSelected = () => {
   $('#example').on('click', 'tr', () => {
     if ($(this).hasClass('selected')) {
@@ -150,10 +200,10 @@ const changeRowSelected = () => {
   });
 };
 
-const createDialog = () => {
-  if (!alertify.myAlert) {
+const createViewDialog = () => {
+  if (!alertify.viewDialog) {
     // define a new dialog
-    alertify.dialog('myAlert', () => ({
+    alertify.dialog('viewDialog', () => ({
       main(message) {
         this.message = message;
       },
@@ -183,6 +233,35 @@ const createDialog = () => {
     }));
   }
 };
+
+const createEditDialog = () => {
+  if (!alertify.editDialog) {
+    alertify.dialog('editDialog', () => ({
+      main(content) {
+        this.setContent(content);
+      },
+      setup() {
+        return {
+          focus: {
+            element() {
+              return this.elements.body.querySelector(this.get('selector'));
+            },
+            select: true,
+          },
+          options: {
+            basic: true,
+            maximizable: false,
+            resizable: false,
+            padding: false,
+          },
+        };
+      },
+      settings: {
+        selector: undefined,
+      },
+    }));
+  }
+};
 /*
 const fetchStudents = () => {
   $.ajax({
@@ -197,16 +276,18 @@ const fetchStudents = () => {
 
 $(document).ready(() => {
   addDataEvent();
+  editDataEvent();
   renderTable();
   changeRowSelected();
-  createDialog();
+  createViewDialog();
+  createEditDialog();
   $('#my-table').on('click', 'td.delete--btn', function () {
     console.log('DELETE BUTTON CLICKED');
     const rowData = studentTable.row($(this).parents('tr')).data();
     const route = `/students/${rowData[0]}`;
     // const test = $(this).parent('tr');
     // const test = studentTable.row($(this).parents('tr')).data();
-    alertify.confirm('Delete Student Record', 'Are you sure you want to delete', () => {
+    alertify.confirm('Delete Student Record', 'Are you sure you want to delete?', () => {
       studentTable.row($(this).parents('tr')).remove().draw(false);
       $.ajax({
         url: route,
@@ -221,10 +302,10 @@ $(document).ready(() => {
       alertify.error('Declined');
     }).set({ labels: { ok: 'Okay', cancel: 'Cancel' }, padding: false });
   });
-  $('#my-table').on('click', 'td.edit--btn', () => {
+  $('#my-table').on('click', 'td.edit--btn', function () {
     console.log('EDIT BUTTON CLICKED');
+    const rowData = studentTable.row($(this).parents('tr')).data();
+    alertify.editDialog(createEditForm(rowData));
   });
-  // call custom dialog
-  alertify.myAlert('DISPLAY THIS');
 });
 
