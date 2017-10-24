@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 
 router.get('/', (req, res) => {
   // res.render('index', { title: 'Express' });
-  res.sendFile(path.join(__dirname, '../../views/index.html'));
+  res.sendFile(path.join(__dirname, '../public/views/index.html'));
 });
 
 // module.exports = router;
