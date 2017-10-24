@@ -18,6 +18,8 @@ import students from './routes/students';
 
 import seedDB from './seed';
 
+require('dotenv').config();
+
 // var index = require('./routes/index');
 // var users = require('./routes/users');
 
@@ -25,7 +27,22 @@ const app = express();
 const compiler = webpack(config);
 
 mongoose.promise = global.Promise;
-mongoose.connect('mongodb://localhost/andela-googletest');
+switch (process.env.ENV) {
+  case 'development':
+    console.log('development');
+    mongoose.connect(process.env.mongoDBDev, {
+      useMongoClient: true,
+    });
+    break;
+  case 'production':
+    console.log('production');
+    mongoose.connect(process.env.mongoDBProd, {
+      useMongoClient: true,
+    });
+    break;
+  default:
+    throw new Error(`Unknown execution environment: ${process.env.ENV}`);
+}
 
 seedDB();
 
