@@ -155,7 +155,7 @@ const renderTable = () => {
       url: '/students',
       dataSrc: d => reFormat(d),
     },
-    initComplete: () => {
+    initComplete() {
       studentTable.buttons().container()
         .appendTo($('.col-md-6:eq(0)', studentTable.table().container()));
     },
@@ -212,6 +212,34 @@ const editDataEvent = () => {
     });
   });
 };
+
+const deleteRecordEvent = (callback) => {
+  $('#my-table').on('click', 'td.delete--btn', function eventCallback() {
+    callback.call(this);
+  });
+};
+
+function deleteRecord() {
+  console.log('DELETE BUTTON CLICKED');
+  const rowData = studentTable.row($(this).parents('tr')).data();
+  const route = `/students/${rowData[0]}`;
+  // const test = $(this).parent('tr');
+  // const test = studentTable.row($(this).parents('tr')).data();
+  alertify.confirm('Delete Student Record', 'Are you sure you want to delete?', () => {
+    studentTable.row($(this).parents('tr')).remove().draw(false);
+    $.ajax({
+      url: route,
+      type: 'DELETE',
+    }).done((data) => {
+      console.log(`DELETE SUCCESSFUL ${data}`);
+    }).fail((err) => {
+      console.log(err);
+    });
+    alertify.success('DELETE SUCCESSFUL');
+  }, () => {
+    alertify.error('Declined');
+  }).set({ labels: { ok: 'Okay', cancel: 'Cancel' }, padding: false });
+}
 
 const changeRowSelected = () => {
   $('#example').on('click', 'tr', () => {
@@ -305,27 +333,7 @@ $(document).ready(() => {
   changeRowSelected();
   createViewDialog();
   createEditDialog();
-  $('#my-table').on('click', 'td.delete--btn', function () {
-    console.log('DELETE BUTTON CLICKED');
-    const rowData = studentTable.row($(this).parents('tr')).data();
-    const route = `/students/${rowData[0]}`;
-    // const test = $(this).parent('tr');
-    // const test = studentTable.row($(this).parents('tr')).data();
-    alertify.confirm('Delete Student Record', 'Are you sure you want to delete?', () => {
-      studentTable.row($(this).parents('tr')).remove().draw(false);
-      $.ajax({
-        url: route,
-        type: 'DELETE',
-      }).done((data) => {
-        console.log(`DELETE SUCCESSFUL ${data}`);
-      }).fail((err) => {
-        console.log(err);
-      });
-      alertify.success('DELETE SUCCESSFUL');
-    }, () => {
-      alertify.error('Declined');
-    }).set({ labels: { ok: 'Okay', cancel: 'Cancel' }, padding: false });
-  });
+  deleteRecordEvent(deleteRecord);
   $('#my-table').on('click', 'td.edit--btn', function () {
     console.log('EDIT BUTTON CLICKED');
     const rowData = studentTable.row($(this).parents('tr')).data();
