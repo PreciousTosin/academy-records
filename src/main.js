@@ -241,6 +241,19 @@ function deleteRecord() {
   }).set({ labels: { ok: 'Okay', cancel: 'Cancel' }, padding: false });
 }
 
+const showEditFormEvent = (callback) => {
+  $('#my-table').on('click', 'td.edit--btn', function showFormCallBk() {
+    callback.call(this);
+  });
+};
+
+function displayEditForm() {
+  console.log('EDIT BUTTON CLICKED');
+  const rowData = studentTable.row($(this).parents('tr')).data();
+  alertify.editDialog(createEditForm(rowData));
+}
+
+
 const changeRowSelected = () => {
   $('#example').on('click', 'tr', () => {
     if ($(this).hasClass('selected')) {
@@ -334,10 +347,6 @@ $(document).ready(() => {
   createViewDialog();
   createEditDialog();
   deleteRecordEvent(deleteRecord);
-  $('#my-table').on('click', 'td.edit--btn', function () {
-    console.log('EDIT BUTTON CLICKED');
-    const rowData = studentTable.row($(this).parents('tr')).data();
-    alertify.editDialog(createEditForm(rowData));
-  });
+  showEditFormEvent(displayEditForm);
 });
 
