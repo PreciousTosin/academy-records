@@ -22,3 +22,16 @@ a {
     padding-top: 2rem;
 }
 
+/*View Dialog styles*/
+.card-title {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+/*.ajs-button {
+    color: #fff;
+    background-color: #0069d9;
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 0.3rem;
+}*/

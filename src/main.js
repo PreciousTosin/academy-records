@@ -31,10 +31,25 @@ const reFormat = (data) => {
 };
 
 const displayData = data => (
-  `<div class="card" style="width: 20rem;">
+  `<div class="card" style="width: 30rem; padding-right: 2rem">
     <div class="card-body">
       <h4 class="card-title">FULL DETAILS</h4>
-      <p class="card-text">${data[1]}</p>
+      <div class="card-text">
+        <form id="display--form">
+          <div class="form-group row">
+            <label for="fullName" class="col-md-3" style="text-align: center; padding-top: 0.5rem">Name</label>
+            <input type="text" class="form-control col-md-9" id="fullName" name="name" value="${data[1]}" disabled>
+          </div>
+          <div class="form-group row">
+            <label for="age" class="col-md-3" style="text-align: center; padding-top: 0.5rem">Age</label>
+            <input type="text" class="form-control col-md-9" id="age" name="age" value="${data[2]}" disabled>
+          </div>
+          <div class="form-group row">
+            <label for="course" class="col-md-3" style="text-align: center; padding-top: 0.5rem">Course</label>
+            <input type="text" class="form-control col-md-9" id="course" name="course" value="${data[3]}" disabled>
+          </div>
+        </form>
+      </div>
     </div>
    </div>`);
 
@@ -262,7 +277,7 @@ const createViewDialog = () => {
       },
       setup() {
         return {
-          buttons: [{ text: 'Exit!', key: 27/* Esc */ }],
+          buttons: [{ text: 'Close!', className: 'btn btn-primary', key: 27/* Esc */ }],
           focus: { element: 0 },
           options: {
             maximizable: true,
@@ -274,13 +289,13 @@ const createViewDialog = () => {
       },
       prepare() {
         this.setContent(this.message);
-        this.setHeader('Record Details');
+        this.setHeader('');
       },
       hooks: {
         onshow() {
           this.elements.dialog.style.maxWidth = 'none';
-          this.elements.dialog.style.width = '80%';
-          this.elements.dialog.style.height = '30%';
+          this.elements.dialog.style.width = '60%';
+          this.elements.dialog.style.height = '50%';
         },
       },
     }));
