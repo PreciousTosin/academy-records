@@ -30,12 +30,14 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: npm install
+      - run:
+          name: Install node_modules with npm
+          command: npm install
 
       - save_cache:
-          paths:
-            - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
 
       # run tests!
       - run: npm test
