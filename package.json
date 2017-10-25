@@ -8,9 +8,11 @@
   },
   "scripts": {
     "start": "node ./build/bin/server.js",
+    "lint": "node_modules/.bin/eslint ./",
     "removebuild": "node_modules/.bin/rimraf build",
     "transpile": "babel . -d build --presets latest --ignore node_modules",
     "build": "npm run removebuild && npm run transpile",
+    "production-bundle": "webpack --config ./build/webpack.prod.config.js --progress",
     "postinstall": "node_modules/.bin/rimraf build && babel . -d build --presets latest --ignore node_modules",
     "heroku-postbuild": "webpack --config ./build/webpack.prod.config.js --progress"
   },
