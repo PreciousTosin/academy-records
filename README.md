@@ -42,7 +42,7 @@ you're running. `npm3` is required to install dependencies properly.
 
 ## Heroku Deployment
 Consult [this documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
-**Note: You will need to set up config vars**. To configure `ENV` and 
+**Note: You will need to set up config vars** in order to configure `ENV` and 
 `mongoDBProd` options. The Procfile is setup already. **Using Heroku CLI, 
 You will have to run** `heroku config:set NPM_CONFIG_PRODUCTION=false`
 in order to install devdependencies for building and bundling code.
