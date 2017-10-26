@@ -28,10 +28,15 @@ a {
     text-align: center;
 }
 
-/*.ajs-button {
-    color: #fff;
-    background-color: #0069d9;
-    text-align: center;
-    border: 1px solid transparent;
-    border-radius: 0.3rem;
-}*/
+.alertify .ajs-dialog {
+    max-width: 600px;
+    min-height: 122px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+}
+
+#id {
+    padding: 0;
+}
