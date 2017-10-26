@@ -81,22 +81,29 @@ const createEditForm = data => (
 );
 
 const createAddForm = () => (
-  `<form id="student--form" action="/students" method="POST">
-    <div class="form-group">
-      <label for="fullName">Name</label>
-      <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="name">
+  `<div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Add New Record</h4>
+      <div class="card-text">
+       <form id="student--form" action="/students" method="POST">
+        <div class="form-group">
+          <label for="fullName">Name</label>
+          <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="text" class="form-control" id="age" placeholder="Age" name="age">
+        </div>
+        <div class="form-group">
+          <label for="course">Course</label>
+          <input type="text" class="form-control" id="course" placeholder="Course" name="course">
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+     </div>
     </div>
-    <div class="form-group">
-      <label for="age">Age</label>
-      <input type="text" class="form-control" id="age" placeholder="Age" name="age">
-    </div>
-    <div class="form-group">
-      <label for="course">Course</label>
-      <input type="text" class="form-control" id="course" placeholder="Course" name="course">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>`
+   </div>`
 );
 
 const renderTable = () => {
