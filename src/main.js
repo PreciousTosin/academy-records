@@ -31,22 +31,22 @@ const reFormat = (data) => {
 };
 
 const displayData = data => (
-  `<div class="card" style="padding-right: 2rem">
+  `<div class="card" style="padding-right: 1rem">
     <div class="card-body">
       <h4 class="card-title">FULL DETAILS</h4>
       <div class="card-text">
         <form id="display--form">
           <div class="form-group row">
-            <label for="fullName" class="col-md-3" style="text-align: center; padding-top: 0.5rem">Name</label>
-            <input type="text" class="form-control col-md-9" id="fullName" name="name" value="${data[1]}" disabled>
+            <label for="fullName" class="col-md-4" style="text-align: center; padding-top: 0.5rem">Name</label>
+            <input type="text" class="form-control col-md-8" id="fullName" name="name" value="${data[1]}" disabled>
           </div>
           <div class="form-group row">
-            <label for="age" class="col-md-3" style="text-align: center; padding-top: 0.5rem">Age</label>
-            <input type="text" class="form-control col-md-9" id="age" name="age" value="${data[2]}" disabled>
+            <label for="age" class="col-md-4" style="text-align: center; padding-top: 0.5rem">Age</label>
+            <input type="text" class="form-control col-md-8" id="age" name="age" value="${data[2]}" disabled>
           </div>
           <div class="form-group row">
-            <label for="course" class="col-md-3" style="text-align: center; padding-top: 0.5rem">Course</label>
-            <input type="text" class="form-control col-md-9" id="course" name="course" value="${data[3]}" disabled>
+            <label for="course" class="col-md-4" style="text-align: center; padding-top: 0.5rem">Course</label>
+            <input type="text" class="form-control col-md-8" id="course" name="course" value="${data[3]}" disabled>
           </div>
         </form>
       </div>
