@@ -239,7 +239,7 @@ function deleteRecord() {
   const route = `/students/${rowData[0]}`;
   // const test = $(this).parent('tr');
   // const test = studentTable.row($(this).parents('tr')).data();
-  alertify.confirm('Delete Student Record', 'Are you sure you want to delete?', () => {
+  alertify.confirm('', () => {
     studentTable.row($(this).parents('tr')).remove().draw(false);
     $.ajax({
       url: route,
@@ -252,7 +252,12 @@ function deleteRecord() {
     alertify.success('DELETE SUCCESSFUL');
   }, () => {
     alertify.error('Declined');
-  }).set({ labels: { ok: 'Okay', cancel: 'Cancel' }, padding: false });
+  }).set({
+    labels: { ok: 'Okay', cancel: 'Cancel' },
+    padding: true,
+    title: '<strong style="font-size:1rem">Delete Student Record</strong><br><hr>',
+    message: '<p style="text-align: center; padding: 0;">Are you sure you want to delete?</p><br><hr>',
+  });
 }
 
 const showEditFormEvent = (callback) => {
