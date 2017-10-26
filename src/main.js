@@ -88,15 +88,15 @@ const createAddForm = () => (
        <form id="student--form" action="/students" method="POST">
         <div class="form-group">
           <label for="fullName">Name</label>
-          <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="name">
+          <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="name" required pattern="[A-Za-z]+">
         </div>
         <div class="form-group">
-          <label for="age">Age</label>
-          <input type="text" class="form-control" id="age" placeholder="Age" name="age">
+          <label for="age">Age</label>    
+          <input type="text" class="form-control" id="age" placeholder="Age" name="age" required pattern="[0-9]+">
         </div>
         <div class="form-group">
           <label for="course">Course</label>
-          <input type="text" class="form-control" id="course" placeholder="Course" name="course">
+          <input type="text" class="form-control" id="course" placeholder="Course" name="course" required pattern="[A-Za-z ]+">
         </div>
     
         <button type="submit" class="btn btn-primary">Submit</button>
