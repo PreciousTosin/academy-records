@@ -54,26 +54,30 @@ const displayData = data => (
    </div>`);
 
 const createEditForm = data => (
-  `<form id="editForm" action="/students/${data[1]}" method="POST">
-    <div class="form-group" style="visibility: hidden">
-      <label for="id">ID</label>
-      <input type="text" class="form-control" id="id" placeholder="Identification" name="id" value="${data[0]}">
-    </div>
-    <div class="form-group">
-      <label for="fullName">Name</label>
-      <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="editedName" value="Moses">
-    </div>
-    <div class="form-group">
-      <label for="age">Age</label>
-      <input type="text" class="form-control" id="age" placeholder="Age" name="editedAge" value="35">
-    </div>
-    <div class="form-group">
-      <label for="course">Course</label>
-      <input type="text" class="form-control" id="course" placeholder="Course" name="editedCourse" value="egbe science">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>`
+  `<div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Edit Record</h4>
+      <div class="card-text">
+        <form id="editForm" action="/students/${data[1]}" method="POST">
+            <input type="text" class="form-control" id="id" style="visibility: hidden" name="id" value="${data[0]}">
+          <div class="form-group">
+            <label for="fullName">Name</label>
+            <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="editedName" value="Moses">
+          </div>
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="text" class="form-control" id="age" placeholder="Age" name="editedAge" value="35">
+          </div>
+          <div class="form-group">
+            <label for="course">Course</label>
+            <input type="text" class="form-control" id="course" placeholder="Course" name="editedCourse" value="egbe science">
+          </div>
+      
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+       </div>
+      </div>
+   </div>`
 );
 
 const createAddForm = () => (
@@ -343,6 +347,10 @@ const fetchStudents = () => {
 */
 
 $(document).ready(() => {
+  alertify.defaults.transition = 'slide';
+  alertify.defaults.theme.ok = 'btn btn-primary';
+  alertify.defaults.theme.cancel = 'btn btn-danger';
+  alertify.defaults.theme.input = 'form-control';
   addDataEvent();
   editDataEvent();
   renderTable();
