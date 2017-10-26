@@ -62,15 +62,15 @@ const createEditForm = data => (
             <input type="text" class="form-control" id="id" style="visibility: hidden" name="id" value="${data[0]}">
           <div class="form-group">
             <label for="fullName">Name</label>
-            <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="editedName" value="Moses">
+            <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="editedName" value="Moses" required pattern="[A-Za-z]+">
           </div>
           <div class="form-group">
             <label for="age">Age</label>
-            <input type="text" class="form-control" id="age" placeholder="Age" name="editedAge" value="35">
+            <input type="text" class="form-control" id="age" placeholder="Age" name="editedAge" value="35" required pattern="[0-9]+">
           </div>
           <div class="form-group">
             <label for="course">Course</label>
-            <input type="text" class="form-control" id="course" placeholder="Course" name="editedCourse" value="egbe science">
+            <input type="text" class="form-control" id="course" placeholder="Course" name="editedCourse" value="egbe science" required pattern="[A-Za-z ]+">
           </div>
       
           <button type="submit" class="btn btn-primary">Submit</button>
