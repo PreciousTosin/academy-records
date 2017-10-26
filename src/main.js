@@ -31,7 +31,7 @@ const reFormat = (data) => {
 };
 
 const displayData = data => (
-  `<div class="card" style="width: 30rem; padding-right: 2rem">
+  `<div class="card" style="padding-right: 2rem">
     <div class="card-body">
       <h4 class="card-title">FULL DETAILS</h4>
       <div class="card-text">
@@ -310,8 +310,8 @@ const createViewDialog = () => {
       hooks: {
         onshow() {
           this.elements.dialog.style.maxWidth = 'none';
-          this.elements.dialog.style.width = '60%';
-          this.elements.dialog.style.height = '50%';
+          this.elements.dialog.style.width = '36%';
+          // this.elements.dialog.style.height = '50%';
         },
       },
     }));
