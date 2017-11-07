@@ -64,15 +64,54 @@ const createEditForm = data => (
             <input type="text" class="form-control" id="id" style="visibility: hidden" name="id" value="${data[0]}">
           <div class="form-group">
             <label for="fullName">Name</label>
-            <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="editedName" value="Moses" required pattern="[A-Za-z]+">
+            <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="editedName" value="${data[1]}" required pattern="[A-Za-z ]+">
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="age">Age</label>    
+              <input type="text" class="form-control" id="age" placeholder="Age" name="editedAge" value="${data[2]}" required pattern="[0-9]+">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="gender">Gender:</label>
+              <select class="form-control select-style" id="gender" name="editedGender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="date">Date of Birth</label>
+              <input type="text" class="form-control" id="date" placeholder="Date of Birth" name="editedDate" 
+                value="${data[4]}" data-provide="datepicker" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" id="phone" placeholder="Phone" name="editedPhone" value="${data[5]}"
+                required>
+            </div>
           </div>
           <div class="form-group">
-            <label for="age">Age</label>
-            <input type="text" class="form-control" id="age" placeholder="Age" name="editedAge" value="35" required pattern="[0-9]+">
+            <label for="email">E-Mail Address</label>
+            <input type="text" class="form-control" id="email" placeholder="Email" name="editedEmail" value="${data[6]}" 
+               required>
           </div>
           <div class="form-group">
-            <label for="course">Course</label>
-            <input type="text" class="form-control" id="course" placeholder="Course" name="editedCourse" value="egbe science" required pattern="[A-Za-z ]+">
+            <label for="address">Residential Address</label>
+            <input type="text" class="form-control" id="address" placeholder="Residential Address" name="editedAddress" 
+              value="${data[7]}" required>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-9">
+              <label for="course">Course</label>
+              <input type="text" class="form-control" id="course" placeholder="Course" name="editedCourse" value="${data[8]}"
+                required>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="grade">Grade</label>
+              <input type="text" class="form-control" id="grade" placeholder="Grade" name="editedGrade" value="${data[9]}"
+                required>
+            </div>
           </div>
       
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -90,7 +129,7 @@ const createAddForm = () => (
        <form id="student--form" action="/students" method="POST">
         <div class="form-group">
           <label for="fullName">Name</label>
-          <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="name" required pattern="[A-Za-z]+">
+          <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="name" required pattern="[A-Za-z ]+">
         </div>
         <div class="row">
           <div class="form-group col-md-6">
@@ -258,7 +297,13 @@ const editDataEvent = () => {
     const formData = {
       name: $('input[name=editedName]').val(),
       age: $('input[name=editedAge]').val(),
+      gender: $('select#gender option:checked').val(),
+      DOB: $('input[name=editedDate]').val(),
+      phone: $('input[name=editedPhone]').val(),
+      email: $('input[name=editedEmail]').val(),
+      address: $('input[name=editedAddress]').val(),
       course: $('input[name=editedCourse]').val(),
+      grade: $('input[name=editedGrade]').val(),
     };
     $.ajax({
       url: route,
