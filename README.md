@@ -28,17 +28,19 @@ you're running. `npm3` is required to install dependencies properly.
 ## In Development
 1. Set `ENV=development` in .env file
 2. Set `mongoDBDev=connection_string` in .env file
-3. Run command `npm run build`  
-4. Run command `npm start`
-5. Navigate to `localhost:3000` in your browser
+3. Run command `npm install`
+4. Run command `npm run build`  
+5. Run command `npm start`
+6. Navigate to `localhost:3000` in your browser
 
 ## In Production
 1. Set `ENV=production` in .env file
 2. Set `mongoDBProd=connection_string` in .env file
-3. Run command `npm run build`  
-3. Run command `npm run production-bundle`  
-4. Run command `npm start`
-5. Navigate to `localhost:3000` in your browser
+3. Run command `npm install`
+4. Run command `npm run build`  
+5. Run command `npm run production-bundle`  
+6. Run command `npm start`
+7. Navigate to `localhost:3000` in your browser
 
 ## Heroku Deployment
 Consult [this documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
@@ -47,6 +49,8 @@ Consult [this documentation](https://devcenter.heroku.com/articles/getting-start
 You will have to run** `heroku config:set NPM_CONFIG_PRODUCTION=false`
 in order to install devdependencies for building and bundling code.
 
+## Live Deployment Link
+[Norman Academy](https://norman-academy.herokuapp.com/)
 
 ### Webpack Configuration
 webtrack-assessment uses Webpack for bundling modules. There are two 
