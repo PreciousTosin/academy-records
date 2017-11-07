@@ -114,6 +114,12 @@ const renderTable = () => {
       null,
       null,
       null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
       {
         className: 'edit--btn',
         orderable: false,
@@ -154,7 +160,7 @@ const renderTable = () => {
     columnDefs: [
       {
         visible: false,
-        targets: [0, 4],
+        targets: [0, 4, 5, 7, 9, 10],
       },
       {
         targets: -1,
