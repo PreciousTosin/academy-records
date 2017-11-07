@@ -1,5 +1,7 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-datepicker';
+import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
 import 'alertifyjs/build/css/alertify.min.css';
 import 'datatables.net-select-bs4/css/select.bootstrap4.min.css';
 import '../public/stylesheets/style.css';
@@ -90,13 +92,46 @@ const createAddForm = () => (
           <label for="fullName">Name</label>
           <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="name" required pattern="[A-Za-z]+">
         </div>
-        <div class="form-group">
-          <label for="age">Age</label>    
-          <input type="text" class="form-control" id="age" placeholder="Age" name="age" required pattern="[0-9]+">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="age">Age</label>    
+            <input type="text" class="form-control" id="age" placeholder="Age" name="age" required pattern="[0-9]+">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="gender">Gender:</label>
+            <select class="form-control select-style" id="gender" name="gender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="date">Date of Birth</label>
+            <input type="text" class="form-control" id="date" placeholder="Date of Birth" name="date" data-provide="datepicker" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" placeholder="Phone" name="phone" required>
+          </div>
         </div>
         <div class="form-group">
-          <label for="course">Course</label>
-          <input type="text" class="form-control" id="course" placeholder="Course" name="course" required pattern="[A-Za-z ]+">
+          <label for="email">E-Mail Address</label>
+          <input type="text" class="form-control" id="email" placeholder="Email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Residential Address</label>
+          <input type="text" class="form-control" id="address" placeholder="Residential Address" name="address" required>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-9">
+            <label for="course">Course</label>
+            <input type="text" class="form-control" id="course" placeholder="Course" name="course" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="grade">Grade</label>
+            <input type="text" class="form-control" id="grade" placeholder="Grade" name="grade" required>
+          </div>
         </div>
     
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -190,7 +225,13 @@ const addDataEvent = () => {
     const formData = {
       name: $('input[name=name]').val(),
       age: $('input[name=age]').val(),
+      gender: $('select#gender option:checked').val(),
+      DOB: $('input[name=date]').val(),
+      phone: $('input[name=phone]').val(),
+      email: $('input[name=email]').val(),
+      address: $('input[name=address]').val(),
       course: $('input[name=course]').val(),
+      grade: $('input[name=grade]').val(),
     };
     $.ajax({
       url: '/students',
@@ -371,6 +412,22 @@ $(document).ready(() => {
   alertify.defaults.theme.ok = 'btn btn-primary';
   alertify.defaults.theme.cancel = 'btn btn-danger';
   alertify.defaults.theme.input = 'form-control';
+  $('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    weekStart: 'Sunday',
+    startDate: '01/01/1900',
+    endDate: '01/01/2050',
+    startView: 1,
+    maxViewMode: 1,
+    todayBtn: 'linked',
+    clearBtn: true,
+    multidate: true,
+    daysOfWeekHighlighted: '0,6',
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true,
+    toggleActive: true,
+  });
   addDataEvent();
   editDataEvent();
   renderTable();
