@@ -118,11 +118,13 @@ const renderTable = () => {
         className: 'edit--btn',
         orderable: false,
         data: null,
+        width: '5%',
       },
       {
         className: 'delete--btn',
         orderable: false,
         data: null,
+        width: '5%',
       },
     ],
     lengthChange: false,
@@ -157,12 +159,12 @@ const renderTable = () => {
       {
         targets: -1,
         data: null,
-        defaultContent: '<button class="edit--btn btn btn-secondary">Delete!</button>',
+        defaultContent: '<button class="edit--btn btn btn-danger">Delete!</button>',
       },
       {
         targets: -2,
         data: null,
-        defaultContent: '<button class="delete--btn btn btn-secondary">Edit!</button>',
+        defaultContent: '<button class="delete--btn btn btn-primary">Edit!</button>',
       },
     ],
     ajax: {
