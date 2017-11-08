@@ -88,12 +88,12 @@ const createEditForm = data => (
             <div class="form-group col-md-6">
               <label for="phone">Phone</label>
               <input type="text" class="form-control" id="phone" placeholder="Phone" name="editedPhone" value="${data[5]}"
-                required>
+                required pattern="[0-9]{11}">
             </div>
           </div>
           <div class="form-group">
             <label for="email">E-Mail Address</label>
-            <input type="text" class="form-control" id="email" placeholder="Email" name="editedEmail" value="${data[6]}" 
+            <input type="email" class="form-control" id="email" placeholder="Email" name="editedEmail" value="${data[6]}" 
                required>
           </div>
           <div class="form-group">
@@ -105,12 +105,12 @@ const createEditForm = data => (
             <div class="form-group col-md-9">
               <label for="course">Course</label>
               <input type="text" class="form-control" id="course" placeholder="Course" name="editedCourse" value="${data[8]}"
-                required>
+                required pattern="[A-Za-z ]+">
             </div>
             <div class="form-group col-md-3">
               <label for="grade">Grade</label>
               <input type="text" class="form-control" id="grade" placeholder="Grade" name="editedGrade" value="${data[9]}"
-                required>
+                required pattern="[0-9][.][0-9][0-9]">
             </div>
           </div>
       
@@ -147,16 +147,18 @@ const createAddForm = () => (
         <div class="row">
           <div class="form-group col-md-6">
             <label for="date">Date of Birth</label>
-            <input type="text" class="form-control" id="date" placeholder="Date of Birth" name="date" data-provide="datepicker" required>
+            <input type="text" class="form-control" id="date" placeholder="Date of Birth" name="date" 
+              data-provide="datepicker" required>
           </div>
           <div class="form-group col-md-6">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone" placeholder="Phone" name="phone" required>
+            <input type="text" class="form-control" id="phone" placeholder="Phone" name="phone" required 
+              pattern="[0-9]{11}">
           </div>
         </div>
         <div class="form-group">
           <label for="email">E-Mail Address</label>
-          <input type="text" class="form-control" id="email" placeholder="Email" name="email" required>
+          <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
         </div>
         <div class="form-group">
           <label for="address">Residential Address</label>
@@ -165,11 +167,13 @@ const createAddForm = () => (
         <div class="row">
           <div class="form-group col-md-9">
             <label for="course">Course</label>
-            <input type="text" class="form-control" id="course" placeholder="Course" name="course" required>
+            <input type="text" class="form-control" id="course" placeholder="Course" name="course" 
+              required pattern="[A-Za-z ]+">
           </div>
           <div class="form-group col-md-3">
             <label for="grade">Grade</label>
-            <input type="text" class="form-control" id="grade" placeholder="Grade" name="grade" required>
+            <input type="text" class="form-control" id="grade" placeholder="Grade" name="grade" 
+              required pattern="[0-9][.][0-9][0-9]">
           </div>
         </div>
     
@@ -440,6 +444,25 @@ const createEditDialog = () => {
     }));
   }
 };
+
+const initializeDatepicker = () => {
+  $('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    weekStart: 'Sunday',
+    startDate: '01/01/1900',
+    endDate: '01/01/2050',
+    startView: 1,
+    maxViewMode: 1,
+    todayBtn: 'linked',
+    clearBtn: true,
+    multidate: true,
+    daysOfWeekHighlighted: '0,6',
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true,
+    toggleActive: true,
+  });
+};
 /*
 const fetchStudents = () => {
   $.ajax({
@@ -457,22 +480,7 @@ $(document).ready(() => {
   alertify.defaults.theme.ok = 'btn btn-primary';
   alertify.defaults.theme.cancel = 'btn btn-danger';
   alertify.defaults.theme.input = 'form-control';
-  $('.datepicker').datepicker({
-    format: 'mm/dd/yyyy',
-    weekStart: 'Sunday',
-    startDate: '01/01/1900',
-    endDate: '01/01/2050',
-    startView: 1,
-    maxViewMode: 1,
-    todayBtn: 'linked',
-    clearBtn: true,
-    multidate: true,
-    daysOfWeekHighlighted: '0,6',
-    calendarWeeks: true,
-    autoclose: true,
-    todayHighlight: true,
-    toggleActive: true,
-  });
+  initializeDatepicker();
   addDataEvent();
   editDataEvent();
   renderTable();
