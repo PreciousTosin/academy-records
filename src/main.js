@@ -257,7 +257,7 @@ const createViewDialog = () => {
       hooks: {
         onshow() {
           this.elements.dialog.style.maxWidth = 'none';
-          this.elements.dialog.style.width = '50%';
+          this.elements.dialog.style.width = '70%';
           // this.elements.dialog.style.height = '50%';
         },
       },
