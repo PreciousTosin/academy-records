@@ -1,7 +1,7 @@
 # webtrack-assessment
 
 <p align="center">
-<a href="https://circleci.com/gh/PreciousTosin/webtrack-assessment"><img src="https://circleci.com/gh/precioustosin/webtrack-assessment.svg?style=shield&circle-token=circle-token" alt="Build Status"></a>
+[![Build Status](http://circleci-badges-max.herokuapp.com/img/PreciousTosin/webtrack-assessment?token=)](https://circleci.com/gh/PreciousTosin/webtrack-assessment)
 </p>
 
 webtrack-assessment is a simple CRUD application built using mongo, 
