@@ -1,5 +1,9 @@
 # webtrack-assessment
 
+<p align="center">
+<a href="https://circleci.com/gh/PreciousTosin/webtrack-assessment"><img src="https://circleci.com/gh/:precioustosin/:webtrack-assessment.svg?style=shield&circle-token=:circle-token" alt="Build Status"></a>
+</p>
+
 webtrack-assessment is a simple CRUD application built using mongo, 
 nodejs and express. It is written using ES6 javascript and it 
 incorporates babel for transpiling server-side code to ES5 and webpack 
