@@ -5,7 +5,7 @@ import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
 import 'alertifyjs/build/css/alertify.min.css';
 import 'datatables.net-select-bs4/css/select.bootstrap4.min.css';
 import '../public/stylesheets/style.css';
-import { createAddForm, createEditForm, displayData } from './forms';
+import { createAddForm, createEditForm, displayTabulatedData } from './forms';
 
 const $ = require('jquery');
 const alertify = require('alertifyjs');
@@ -79,7 +79,7 @@ const renderTable = () => {
           if (rowData === undefined) {
             alertify.error('Select a row to view record');
           } else {
-            alertify.viewDialog(displayData(rowData));
+            alertify.viewDialog(displayTabulatedData(rowData));
           }
         },
       },

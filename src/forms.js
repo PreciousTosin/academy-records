@@ -127,27 +127,45 @@ const createAddForm = () => (
    </div>`
 );
 
-const displayData = data => (
-  `<div class="card" style="padding-right: 1rem">
-    <div class="card-body">
-      <h4 class="card-title">FULL DETAILS</h4>
-      <div class="card-text">
-        <form id="display--form">
-          <div class="form-group row">
-            <label for="fullName" class="col-md-4" style="text-align: center; padding-top: 0.5rem">Name</label>
-            <input type="text" class="form-control col-md-8" id="fullName" name="name" value="${data[1]}" disabled>
-          </div>
-          <div class="form-group row">
-            <label for="age" class="col-md-4" style="text-align: center; padding-top: 0.5rem">Age</label>
-            <input type="text" class="form-control col-md-8" id="age" name="age" value="${data[2]}" disabled>
-          </div>
-          <div class="form-group row">
-            <label for="course" class="col-md-4" style="text-align: center; padding-top: 0.5rem">Course</label>
-            <input type="text" class="form-control col-md-8" id="course" name="course" value="${data[3]}" disabled>
-          </div>
-        </form>
-      </div>
-    </div>
-   </div>`);
+const displayTabulatedData = data => (
+  `<h3 class="text-center">Detailed Record</h3>
+   <table class="display table table-striped table-hover"  cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Date of Birth</th>
+              <th>Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>${data[1]}</td>
+              <td>${data[2]}</td>
+              <td>${data[3]}</td>
+              <td>${data[4]}</td>
+              <td>${data[5]}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="display table table-striped table-hover"  cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Course</th>
+              <th>Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>${data[6]}</td>
+              <td>${data[7]}</td>
+              <td>${data[8]}</td>
+              <td>${data[9]}</td>
+            </tr>
+          </tbody>
+        </table>`);
 
-export { createAddForm, createEditForm, displayData };
+export { createAddForm, createEditForm, displayTabulatedData };
