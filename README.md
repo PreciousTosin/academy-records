@@ -1,10 +1,10 @@
-<h1 align="center" >webtrack-assessment</h1>
+<h1 align="center" >Academy-Records</h1>
 
 <p align="center">
 <a href="https://circleci.com/gh/PreciousTosin/webtrack-assessment"><img src="https://circleci.com/gh/PreciousTosin/webtrack-assessment.svg?style=shield" alt="Build Status"></a>
 </p>
 
-webtrack-assessment is a simple CRUD application built using mongo, 
+Academy-Records is a simple CRUD application built using mongo, 
 nodejs and express. It is written using ES6 javascript and it 
 incorporates babel for transpiling server-side code to ES5 and webpack 
 for bundling  client-side modules
